@@ -22,7 +22,7 @@ const StartMapReduce = () => {
       });
       
       // Set the status received from the server
-      setMapReduceStatus(response.data.status);
+      setMapReduceStatus(response.data.message);
 
       // Show the modal after successful map-reduce job
       setShowModal(true);
@@ -110,7 +110,7 @@ const StartMapReduce = () => {
               </button>
             </div>
             <div className="modal-body">
-              {mapReduceStatus === "Completed" ? (
+              {mapReduceStatus === "Map Reduce Completed successfully" ? (
                 <p>MapReduce job has completed successfully.</p>
               ) : (
                 <p>MapReduce job has failed.</p>

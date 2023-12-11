@@ -15,6 +15,8 @@ import Home from "./components/Home";
 import UpdateBooks from "./components/UpdateBooks";
 import StartMapReduce from "./components/StartMapReduce";
 import CurrentlyProcessedBooks from "./components/CurrentlyProcessedBooks";
+import Dev from "./components/Dev";
+import MoreInfo from "./components/MoreInfo";
 
 const App = () => {
   // Initial code which should be uncommented once roles are included in user data
@@ -87,6 +89,16 @@ const App = () => {
                 Current Books
               </NavLink>
             </li>
+            <li className="nav-item">
+              <NavLink
+                to={"/dev"}
+                className={({ isActive }) => {
+                  return "nav-link" + (isActive ? " active" : "");
+                }}
+              >
+                Dev
+              </NavLink>
+            </li>
           </ul>
         </div>
 
@@ -110,6 +122,8 @@ const App = () => {
           <Route path="/update-books" element={<UpdateBooks />} />{" "}
           <Route path="/start-mapreduce" element={<StartMapReduce />} />{" "}
           <Route path="/currentlyprocessedbooks" element={<CurrentlyProcessedBooks />} />{" "}
+          <Route path="/dev" element={<Dev />} />{" "}
+          <Route path="/moreinfo" element={<MoreInfo />} />{" "}
           {/* Add this line */}
         </Routes>
       </div>

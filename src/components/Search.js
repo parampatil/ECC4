@@ -4,7 +4,10 @@ import { API_URL } from "../config";
 
 const Search = () => {
   const [query, setQuery] = useState("");
+  const [notFound, setNotFound] = useState(false);
   const [results, setResults] = useState([]);
+
+  const handleClose = () => setNotFound(false);
 
   const fetchData = () => {
     axios
@@ -18,8 +21,14 @@ const Search = () => {
         }
       )
       .then((response) => {
-        setResults(response.data);
+        
         console.log(response.data);
+        if (response.data.message === "Not Found") {
+          setNotFound(true);
+
+        }else{
+          setResults(response.data);
+        }
       })
       .catch((error) => {
         console.error("Error fetching query:", error);
@@ -90,12 +99,49 @@ const Search = () => {
           <h2>Search Results:</h2>
           <div className="container-fluid d-flex">
             {results.map((result) => (
-              <div key={result[0]} id={`card-${result[0]}`} className="card mb-4 mx-2"></div>
+              <div
+                key={result[0]}
+                id={`card-${result[0]}`}
+                className="card mb-4 mx-2"
+              ></div>
             ))}
           </div>
         </div>
       )}
+
+      
+      {/* Bootstrap Modal for Popup */}
+      <div
+        className={`modal fade${notFound ? " show" : ""}`}
+        style={{ display: notFound ? "block" : "none" }}
+        tabIndex="-1"
+        role="dialog"
+        aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog modal-dialog-centered" role="document">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="exampleModalCenterTitle">
+                MapReduce Status
+              </h5>
+              <button type="button" className="close" data-dismiss="modal" aria-label="Close" onClick={handleClose}>
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div className="modal-body">
+                <p>Could not find the word in any book.</p>
+            </div>
+            <div className="modal-footer">
+              <button type="button" className="btn btn-primary" onClick={handleClose}>
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
+      {/* End of Modal */}
+    </div>
   );
 };
 
