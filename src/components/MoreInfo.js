@@ -1,5 +1,6 @@
 // MoreInfo.js
 import React from "react";
+import diagram from "../Assets/diagram.jpg"
 
 const MoreInfo = () => {
   return (
@@ -68,6 +69,12 @@ const MoreInfo = () => {
             <li>Reducer - Google Cloud Function (reducer.py)</li>
           </ul>
         </div>
+      </div>
+      <div className="row mt-4">
+        <h4 className="mb-3">
+           Flow Diagram
+        </h4>
+        <img src={diagram} className="mb-5" alt="Diagram"></img>
       </div>
     </div>
   );

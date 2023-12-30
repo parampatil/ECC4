@@ -47,6 +47,18 @@ const Dev = () => {
     }
   };
 
+  const handleCleanUp = async () => {
+    try {
+      setLoading(true);
+      const response = await axios.get(API_URL + "cleanup");
+      setUrls(response.data);
+    } catch (error) {
+      console.error("Error cleaning up:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="container mt-5">
       <h2>Dev Tools</h2>
@@ -57,8 +69,11 @@ const Dev = () => {
         <button className="btn btn-primary me-2" onClick={handleGetUrls} disabled={loading}>
           Get URLs
         </button>
-        <button className="btn btn-primary" onClick={handleUpdateUrls} disabled={loading}>
+        <button className="btn btn-primary me-2" onClick={handleUpdateUrls} disabled={loading}>
           Update URLs
+        </button>
+        <button className="btn btn-primary" onClick={handleCleanUp} disabled={loading}>
+          Clean Up
         </button>
       </div>
 
